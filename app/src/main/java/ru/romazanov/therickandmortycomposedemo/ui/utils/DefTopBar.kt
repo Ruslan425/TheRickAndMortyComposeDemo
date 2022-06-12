@@ -20,9 +20,8 @@ import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 fun DefTopBar(
     navHostController: NavHostController
 ) {
-
     TopAppBar(
-        backgroundColor = Color.White
+        backgroundColor = MaterialTheme.colors.onPrimary
     ) {
         Row(
             modifier = Modifier.fillMaxSize(),
@@ -36,7 +35,7 @@ fun DefTopBar(
                     Screen.LocationScreen.route -> stringResource(R.string.location_field)
                     else -> stringResource(R.string.rick_and_morty_field)
                 },
-                style = MaterialTheme.typography.h4.copy(Color.Black),
+                style = MaterialTheme.typography.h4,
             )
         }
     }

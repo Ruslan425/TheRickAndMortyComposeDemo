@@ -39,7 +39,6 @@ fun StartScreenUI(navHostController: NavHostController) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_one),
                     contentDescription = "",
-                    tint = Color.Black,
                     modifier = Modifier.padding(end = 2.dp)
                 )
 
@@ -47,7 +46,6 @@ fun StartScreenUI(navHostController: NavHostController) {
                 Text(
                     text = stringResource(R.string.character_field),
                     style = MaterialTheme.typography.h5,
-                    color = Color.Black
                 )
             }
             OutlinedButton(
@@ -62,13 +60,11 @@ fun StartScreenUI(navHostController: NavHostController) {
                 Icon(
                     painter = painterResource(id = R.drawable.ic_three),
                     contentDescription = "",
-                    tint = Color.Black,
                     modifier = Modifier.padding(end = 2.dp)
                 )
                 Text(
                     text = stringResource(R.string.location_field),
                     style = MaterialTheme.typography.h5,
-                    color = Color.Black
                 )
             }
             OutlinedButton(
@@ -82,13 +78,11 @@ fun StartScreenUI(navHostController: NavHostController) {
 
                 Icon(
                     painter = painterResource(id = R.drawable.ic_two),
-                    contentDescription = "",
-                    tint = Color.Black
+                    contentDescription = ""
                 )
                 Text(
                     text = stringResource(R.string.episode_field),
                     style = MaterialTheme.typography.h5,
-                    color = Color.Black
                 )
             }
         }
