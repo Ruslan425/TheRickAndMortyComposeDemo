@@ -2,20 +2,14 @@ package ru.romazanov.therickandmortycomposedemo.ui.screens
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Face
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
@@ -41,13 +35,17 @@ fun StartScreenUI(navHostController: NavHostController) {
                 onClick = {
                     navHostController.navigate(Screen.CharacterScreen.route)
                 }) {
+
                 Icon(
-                    imageVector = Icons.Default.Face,
+                    painter = painterResource(id = R.drawable.ic_one),
                     contentDescription = "",
-                    tint = Color.Black)
+                    tint = Color.Black,
+                    modifier = Modifier.padding(end = 2.dp)
+                )
+
 
                 Text(
-                    text = "Персонажи",
+                    text = stringResource(R.string.character_field),
                     style = MaterialTheme.typography.h5,
                     color = Color.Black
                 )
@@ -60,14 +58,15 @@ fun StartScreenUI(navHostController: NavHostController) {
                 onClick = {
                     navHostController.navigate(Screen.LocationScreen.route)
                 }) {
-                Icon(
-                    imageVector = Icons.Default.Place,
-                    contentDescription = "",
-                    tint = Color.Black
-                )
 
+                Icon(
+                    painter = painterResource(id = R.drawable.ic_three),
+                    contentDescription = "",
+                    tint = Color.Black,
+                    modifier = Modifier.padding(end = 2.dp)
+                )
                 Text(
-                    text = "Локации",
+                    text = stringResource(R.string.location_field),
                     style = MaterialTheme.typography.h5,
                     color = Color.Black
                 )
@@ -82,12 +81,12 @@ fun StartScreenUI(navHostController: NavHostController) {
                 }) {
 
                 Icon(
-                    painter = painterResource(id = R.drawable.ic_baseline_dashboard_24),
+                    painter = painterResource(id = R.drawable.ic_two),
                     contentDescription = "",
                     tint = Color.Black
                 )
                 Text(
-                    text = "Эпизоды",
+                    text = stringResource(R.string.episode_field),
                     style = MaterialTheme.typography.h5,
                     color = Color.Black
                 )
@@ -96,12 +95,3 @@ fun StartScreenUI(navHostController: NavHostController) {
     }
 }
 
-/*
-@Preview(showBackground = true)
-@Composable
-fun Prew() {
-    val nav = rememberNavController()
-    StartScreenUI(navHostController = nav)
-}
-
- */

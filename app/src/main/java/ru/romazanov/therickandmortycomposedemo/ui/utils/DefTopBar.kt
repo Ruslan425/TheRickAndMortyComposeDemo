@@ -11,7 +11,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavHostController
+import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 
 @Composable
@@ -29,10 +31,10 @@ fun DefTopBar(
         ) {
             Text(
                 text = when(navHostController.currentDestination?.route) {
-                    Screen.CharacterScreen.route -> "Персонажи"
-                    Screen.EpisodeScreen.route -> "Эпизоды"
-                    Screen.LocationScreen.route -> "Локации"
-                    else -> "Рик и Морти"
+                    Screen.CharacterScreen.route -> stringResource(R.string.character_field)
+                    Screen.EpisodeScreen.route -> stringResource(R.string.episode_field)
+                    Screen.LocationScreen.route -> stringResource(R.string.location_field)
+                    else -> stringResource(R.string.rick_and_morty_field)
                 },
                 style = MaterialTheme.typography.h4.copy(Color.Black),
             )

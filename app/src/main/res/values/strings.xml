@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">The Rick and Morty ComposeDemo</string>
+    <string name="character_field">Персонажи</string>
+    <string name="location_field">Локации</string>
+    <string name="episode_field">Эпизоды</string>
+    <string name="character_field_gender">Гендр</string>
+    <string name="default_field_type">Tип</string>
+    <string name="character_field_location">Расположение</string>
+    <string name="back_button_text">Назад</string>
+    <string name="search_field_text">Поиск</string>
+    <string name="rick_and_morty_field">Рик и Морти</string>
+    <string name="episode_field_date">Дата выпуска</string>
+    <string name="episode_field_season">Сезон</string>
+    <string name="episode_field_episode">Серия</string>
+    <string name="location_field_dimension">Измерение</string>
+    <string name="default_unknown">Неизвестен</string>
 </resources>

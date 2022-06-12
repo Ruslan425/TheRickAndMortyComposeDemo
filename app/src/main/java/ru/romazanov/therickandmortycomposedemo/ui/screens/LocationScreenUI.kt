@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -45,11 +44,17 @@ fun LocationScreenUI(
             DefSearch(state = textState)
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(viewModel.locationListState.value.results) { item ->
-                    LocationCard(result = item)
+
+                    if (textState.value.text.isEmpty()) {
+                        LocationCard(result = item)
+                    } else {
+                        if (item.name.lowercase().contains(textState.value.text.toRegex())) {
+                            LocationCard(result = item)
+                        }
+                    }
+
                 }
             }
-
         }
     }
-
 }

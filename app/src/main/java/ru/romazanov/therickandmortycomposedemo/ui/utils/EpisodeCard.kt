@@ -9,7 +9,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.data.models.episode.Result
 
 @Composable
@@ -25,15 +27,16 @@ fun EpisodeCard(
         shape = RoundedCornerShape(5.dp)
     ) {
         Column(
-            horizontalAlignment = Alignment.Start
+            horizontalAlignment = Alignment.Start,
+            modifier = Modifier.padding(start = 4.dp)
         ) {
             Text(
                 text = result.name,
                 style = MaterialTheme.typography.h5
             )
-            Text(text = "Дата выпуска: ${result.air_date}")
-            Text(text = result.episode)
-            Text(text = result.episode)
+            Text(text = stringResource(R.string.episode_field_date) + ": " + result.air_date)
+            Text(text = stringResource(R.string.episode_field_season) + ": " + result.episode.substring(1, 3))
+            Text(text = stringResource(R.string.episode_field_episode) + ": " + result.episode.substring(4, 6))
         }
 
     }

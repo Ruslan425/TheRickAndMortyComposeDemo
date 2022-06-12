@@ -43,7 +43,13 @@ fun CharacterScreenUI(
             DefSearch(state = textState)
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(viewModel.characterListState.value.results) { item ->
-                    CharacterCard(result = item)
+                    if (textState.value.text.isEmpty()) {
+                        CharacterCard(result = item)
+                    } else {
+                        if (item.name.lowercase().contains(textState.value.text.toRegex())) {
+                            CharacterCard(result = item)
+                        }
+                    }
                 }
             }
         }

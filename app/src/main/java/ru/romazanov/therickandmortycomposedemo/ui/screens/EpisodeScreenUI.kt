@@ -4,14 +4,12 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
@@ -25,8 +23,8 @@ fun EpisodeScreenUI(
     navHostController: NavHostController,
     viewModel: MainViewModel
 ) {
-
     val textState = remember { mutableStateOf(TextFieldValue("")) }
+
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -36,9 +34,9 @@ fun EpisodeScreenUI(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Row(modifier = Modifier
-                .padding(start = 8.dp)
-                .fillMaxWidth()
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
             ) {
                 DefButtonBack {
                     navHostController.navigate(Screen.StartScreen.route)
@@ -47,10 +45,15 @@ fun EpisodeScreenUI(
             DefSearch(state = textState)
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(viewModel.episodeListState.value.results) { item ->
-                    EpisodeCard(result = item)
+                    if (textState.value.text.isEmpty()) {
+                        EpisodeCard(result = item)
+                    } else {
+                        if (item.name.lowercase().contains(textState.value.text.toRegex())) {
+                            EpisodeCard(result = item)
+                        }
+                    }
                 }
             }
-
         }
     }
 
