@@ -10,13 +10,17 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
 
 
 @Composable
-fun StartScreenUI(navHostController: NavHostController) {
+fun StartScreenUI(
+    navHostController: NavHostController,
+    viewModel: MainViewModel
+) {
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -33,6 +37,7 @@ fun StartScreenUI(navHostController: NavHostController) {
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
+                    viewModel.getCharacterList("1")
                     navHostController.navigate(Screen.CharacterScreen.route)
                 }) {
 
@@ -54,6 +59,7 @@ fun StartScreenUI(navHostController: NavHostController) {
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
+                    viewModel.getLocationList("1")
                     navHostController.navigate(Screen.LocationScreen.route)
                 }) {
 
@@ -73,6 +79,7 @@ fun StartScreenUI(navHostController: NavHostController) {
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
+                    viewModel.getEpisodeList("1")
                     navHostController.navigate(Screen.EpisodeScreen.route)
                 }) {
 

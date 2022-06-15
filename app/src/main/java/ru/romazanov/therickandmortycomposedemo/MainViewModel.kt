@@ -1,5 +1,6 @@
 package ru.romazanov.therickandmortycomposedemo
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,43 +17,58 @@ class MainViewModel: ViewModel() {
     var characterListState = mutableStateOf(Character())
     var episodeListState = mutableStateOf(Episode())
     var locationListState = mutableStateOf(Location())
-
+    var lazyListState by mutableStateOf(LazyListState())
     private var errorMessage: String by mutableStateOf("")
 
-    init {
-        getCharacterList()
-        getEpisodeList()
-        getLocationList()
-    }
+    var page = 1
 
-    private fun getCharacterList() {
+
+
+
+
+    fun addCharacter(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getCharacterList()
-                characterListState.value = answer
+                val answer = apiInterface.getCharacterList(page)
+                characterListState.value.results += answer.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
+                println(errorMessage)
             }
         }
     }
 
-    private fun getEpisodeList() {
+
+    fun getCharacterList(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getEpisodeList()
+                val answer = apiInterface.getCharacterList(page)
+                characterListState.value = answer
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+                println(errorMessage)
+            }
+        }
+    }
+
+     fun getEpisodeList(page: String) {
+        viewModelScope.launch {
+            val apiInterface = ApiInterface.getInstance()
+            try {
+                val answer = apiInterface.getEpisodeList(page)
                 episodeListState.value = answer
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
         }
     }
-    private fun getLocationList() {
+   fun getLocationList(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getLocationList()
+                val answer = apiInterface.getLocationList(page)
                 locationListState.value = answer
             } catch (e: Exception) {
                 errorMessage = e.message.toString()

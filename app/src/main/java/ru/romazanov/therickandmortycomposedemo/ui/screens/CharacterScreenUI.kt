@@ -3,16 +3,20 @@ package ru.romazanov.therickandmortycomposedemo.ui.screens
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import kotlinx.coroutines.launch
 import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 import ru.romazanov.therickandmortycomposedemo.ui.utils.CharacterCard
@@ -26,6 +30,8 @@ fun CharacterScreenUI(
     viewModel: MainViewModel
 ) {
     val textState = remember { mutableStateOf(TextFieldValue("")) }
+
+
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -41,19 +47,31 @@ fun CharacterScreenUI(
                 }
             }
             DefSearch(state = textState)
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(viewModel.characterListState.value.results) { item ->
-                    if (textState.value.text.isEmpty()) {
-                        CharacterCard(result = item)
-                    } else {
-                        if (item.name.lowercase().contains(textState.value.text.toRegex())) {
+            if (viewModel.characterListState.value.results.isEmpty()) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text("Wait")  //TODO need add loading indicator
+                }
+            } else {
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                    state = viewModel.lazyListState
+                ) {
+                    items(viewModel.characterListState.value.results) { item ->
+                        if (textState.value.text.isEmpty()) {
                             CharacterCard(result = item)
+                        } else {
+                            if (item.name.lowercase().contains(textState.value.text.toRegex())) {
+                                CharacterCard(result = item)
+                            }
                         }
                     }
                 }
             }
+
         }
     }
-
 }
 
