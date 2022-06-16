@@ -19,7 +19,6 @@ import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
 @Composable
 fun StartScreenUI(
     navHostController: NavHostController,
-    viewModel: MainViewModel
 ) {
     Scaffold(
         topBar = {
@@ -37,7 +36,6 @@ fun StartScreenUI(
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
-                    viewModel.getCharacterList("1")
                     navHostController.navigate(Screen.CharacterScreen.route)
                 }) {
 
@@ -46,7 +44,6 @@ fun StartScreenUI(
                     contentDescription = "",
                     modifier = Modifier.padding(end = 2.dp)
                 )
-
 
                 Text(
                     text = stringResource(R.string.character_field),
@@ -59,7 +56,6 @@ fun StartScreenUI(
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
-                    viewModel.getLocationList("1")
                     navHostController.navigate(Screen.LocationScreen.route)
                 }) {
 
@@ -79,7 +75,6 @@ fun StartScreenUI(
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
-                    viewModel.getEpisodeList("1")
                     navHostController.navigate(Screen.EpisodeScreen.route)
                 }) {
 

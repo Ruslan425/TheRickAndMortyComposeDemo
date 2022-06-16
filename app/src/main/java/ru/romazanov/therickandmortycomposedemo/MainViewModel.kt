@@ -8,30 +8,36 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Character
+import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Result
 import ru.romazanov.therickandmortycomposedemo.data.models.episode.Episode
 import ru.romazanov.therickandmortycomposedemo.data.models.location.Location
 import ru.romazanov.therickandmortycomposedemo.data.retrofit.ApiInterface
+import ru.romazanov.therickandmortycomposedemo.utils.PAGE
 
 class MainViewModel: ViewModel() {
 
-    var characterListState = mutableStateOf(Character())
+
+
+    lateinit var character: Character
     var episodeListState = mutableStateOf(Episode())
     var locationListState = mutableStateOf(Location())
     var lazyListState by mutableStateOf(LazyListState())
     private var errorMessage: String by mutableStateOf("")
 
-    var page = 1
+    var characterList by mutableStateOf(listOf<Result>())
 
-
-
-
-
+    init {
+        getCharacterList(PAGE)
+        getEpisodeList(PAGE)
+        getLocationList(PAGE)
+    }
     fun addCharacter(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
                 val answer = apiInterface.getCharacterList(page)
-                characterListState.value.results += answer.results
+                character = answer
+                characterList += character.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 println(errorMessage)
@@ -39,13 +45,13 @@ class MainViewModel: ViewModel() {
         }
     }
 
-
-    fun getCharacterList(page: String) {
+    private fun getCharacterList(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
                 val answer = apiInterface.getCharacterList(page)
-                characterListState.value = answer
+                character = answer
+                characterList = answer.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
                 println(errorMessage)
@@ -53,7 +59,7 @@ class MainViewModel: ViewModel() {
         }
     }
 
-     fun getEpisodeList(page: String) {
+     private fun getEpisodeList(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
@@ -64,7 +70,7 @@ class MainViewModel: ViewModel() {
             }
         }
     }
-   fun getLocationList(page: String) {
+   private fun getLocationList(page: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
@@ -77,4 +83,5 @@ class MainViewModel: ViewModel() {
     }
 
 }
+
 
