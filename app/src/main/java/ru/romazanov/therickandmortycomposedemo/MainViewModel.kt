@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ru.romazanov.therickandmortycomposedemo.data.Favorite
 import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Character
 import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Result
 import ru.romazanov.therickandmortycomposedemo.data.models.episode.Episode
@@ -15,6 +16,9 @@ import ru.romazanov.therickandmortycomposedemo.utils.PAGE
 
 class MainViewModel : ViewModel() {
 
+
+
+    var favorite by mutableStateOf(listOf<Favorite>())
 
     var character by mutableStateOf(Character())
     var episode by mutableStateOf(Episode())
@@ -31,6 +35,8 @@ class MainViewModel : ViewModel() {
         getEpisodeList(PAGE)
         getLocationList(PAGE)
     }
+
+
 
      fun getCharacterList(page: String) {
         viewModelScope.launch {
