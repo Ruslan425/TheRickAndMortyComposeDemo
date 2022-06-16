@@ -7,19 +7,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
 import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Result
+import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 import java.net.URLDecoder
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharacterCard(
-    result: Result
+    result: Result,
+    navHostController: NavHostController
 ) {
 
     Card(
@@ -28,7 +33,11 @@ fun CharacterCard(
             .fillMaxWidth()
             .height(100.dp),
         elevation = 4.dp,
-        shape = RoundedCornerShape(5.dp)
+        shape = RoundedCornerShape(5.dp),
+        onClick = {
+            println(result.id)
+            navHostController.navigate(Screen.CharacterUnitScreen.route + "/${result.id}")
+        }
     ) {
         Row(
             modifier = Modifier
@@ -36,7 +45,6 @@ fun CharacterCard(
                 .fillMaxHeight()
                 .width(100.dp)
         ) {
-            Text(text = result.id.toString())
             Image(
                 painter = rememberImagePainter(
                     data = URLDecoder.decode(result.image)

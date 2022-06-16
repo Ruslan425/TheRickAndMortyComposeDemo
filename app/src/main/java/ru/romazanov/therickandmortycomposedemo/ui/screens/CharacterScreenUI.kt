@@ -53,7 +53,7 @@ fun CharacterScreenUI(
                         val page = viewModel.character.info.next?.substringAfter('=')
                         viewModel.getCharacterList(page!!)
                     }
-                    CharacterCard(result = viewModel.characterList[it])
+                    CharacterCard(result = viewModel.characterList[it], navHostController)
                 }
             }
         }
