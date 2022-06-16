@@ -13,19 +13,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavHostController
 import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
-import ru.romazanov.therickandmortycomposedemo.ui.utils.DefButtonBack
-import ru.romazanov.therickandmortycomposedemo.ui.utils.DefSearch
-import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
-import ru.romazanov.therickandmortycomposedemo.ui.utils.LocationCard
+import ru.romazanov.therickandmortycomposedemo.ui.utils.*
 
 @Composable
 fun LocationScreenUI(
     navHostController: NavHostController,
     viewModel: MainViewModel
 ) {
-
-    val textState = remember { mutableStateOf(TextFieldValue("")) }
-
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -41,18 +35,16 @@ fun LocationScreenUI(
                     navHostController.navigate(Screen.StartScreen.route)
                 }
             }
-            DefSearch(state = textState)
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(viewModel.locationListState.value.results) { item ->
-
-                    if (textState.value.text.isEmpty()) {
-                        LocationCard(result = item)
-                    } else {
-                        if (item.name.lowercase().contains(textState.value.text.toRegex())) {
-                            LocationCard(result = item)
-                        }
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                val count = viewModel.locationList.size
+                items(count) {
+                    if (it >= viewModel.locationList.size - 1 && viewModel.location.info.next != null) {
+                        val page = viewModel.location.info.next?.substringAfter('=')
+                        viewModel.getLocationList(page!!)
                     }
-
+                    LocationCard(result = viewModel.locationList[it])
                 }
             }
         }

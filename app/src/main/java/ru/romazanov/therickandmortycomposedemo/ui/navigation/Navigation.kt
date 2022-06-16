@@ -16,7 +16,6 @@ fun Navigation(
     navHostController: NavHostController,
     viewModel: MainViewModel
 ) {
-
     NavHost(navController = navHostController, startDestination = Screen.StartScreen.route) {
         composable(Screen.StartScreen.route) {
             StartScreenUI(navHostController = navHostController)

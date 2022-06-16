@@ -25,11 +25,8 @@ import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
 @Composable
 fun CharacterScreenUI(
     navHostController: NavHostController,
-    viewModel: MainViewModel
+    viewModel: MainViewModel,
 ) {
-
-    val textState = remember { mutableStateOf(TextFieldValue("")) }
-
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -46,41 +43,19 @@ fun CharacterScreenUI(
                 DefButtonBack {
                     navHostController.navigate(Screen.StartScreen.route)
                 }
-
-                OutlinedButton(modifier = Modifier.padding(end = 4.dp),
-                    onClick = {
-                        val page = viewModel.character.info.next.substringAfter('=')
-                        viewModel.addCharacter(page) // TODO add normal page
-                    }) {
-                    Text(text = "Добавить")
-                }
             }
-
-            DefSearch(state = textState)
-            if (viewModel.characterList.isEmpty()) {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center
-                ) {
-                    Text("Wait")  //TODO need add loading indicator
-                }
-            } else {
-                LazyColumn(
-                    modifier = Modifier.fillMaxSize(),
-                    state = viewModel.lazyListState
-                ) {
-                    items(viewModel.characterList) { item ->
-                        if (textState.value.text.isEmpty()) {
-                            CharacterCard(result = item)
-                        } else {
-                            if (item.name.lowercase().contains(textState.value.text.toRegex())) {
-                                CharacterCard(result = item)
-                            }
-                        }
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                val count = viewModel.characterList.size
+                items(count) {
+                    if (it >= viewModel.characterList.size - 1 &&  viewModel.character.info.next != null) {
+                        val page = viewModel.character.info.next?.substringAfter('=')
+                        viewModel.getCharacterList(page!!)
                     }
+                    CharacterCard(result = viewModel.characterList[it])
                 }
             }
-
         }
     }
 }

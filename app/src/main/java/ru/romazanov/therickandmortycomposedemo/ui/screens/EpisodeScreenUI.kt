@@ -13,18 +13,13 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.navigation.NavHostController
 import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
-import ru.romazanov.therickandmortycomposedemo.ui.utils.DefButtonBack
-import ru.romazanov.therickandmortycomposedemo.ui.utils.DefSearch
-import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
-import ru.romazanov.therickandmortycomposedemo.ui.utils.EpisodeCard
+import ru.romazanov.therickandmortycomposedemo.ui.utils.*
 
 @Composable
 fun EpisodeScreenUI(
     navHostController: NavHostController,
     viewModel: MainViewModel
 ) {
-    val textState = remember { mutableStateOf(TextFieldValue("")) }
-
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -42,19 +37,19 @@ fun EpisodeScreenUI(
                     navHostController.navigate(Screen.StartScreen.route)
                 }
             }
-            DefSearch(state = textState)
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(viewModel.episodeListState.value.results) { item ->
-                    if (textState.value.text.isEmpty()) {
-                        EpisodeCard(result = item)
-                    } else {
-                        if (item.name.lowercase().contains(textState.value.text.toRegex())) {
-                            EpisodeCard(result = item)
-                        }
+            LazyColumn(
+                modifier = Modifier.fillMaxSize(),
+            ) {
+                val count = viewModel.episodeList.size
+                items(count) {
+                    if (it >= viewModel.episodeList.size - 1 && viewModel.episode.info.next != null) {
+                        val page = viewModel.episode.info.next?.substringAfter('=')
+                        viewModel.getEpisodeList(page!!)
                     }
+                    EpisodeCard(result = viewModel.episodeList[it])
                 }
             }
         }
     }
-
 }
+

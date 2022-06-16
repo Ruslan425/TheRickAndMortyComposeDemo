@@ -36,6 +36,7 @@ fun CharacterCard(
                 .fillMaxHeight()
                 .width(100.dp)
         ) {
+            Text(text = result.id.toString())
             Image(
                 painter = rememberImagePainter(
                     data = URLDecoder.decode(result.image)
