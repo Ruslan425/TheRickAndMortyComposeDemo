@@ -9,9 +9,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import ru.romazanov.therickandmortycomposedemo.MainViewModel
+import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -35,7 +37,11 @@ fun FavoriteBlock(
                     .size(80.dp, 80.dp),
                 elevation = 4.dp,
                 onClick = {
-                    navHostController.navigate(Screen.CharacterUnitScreen.route + "/${item.id}")
+                    when (item.category) {
+                        "Персонажи" -> navHostController.navigate(Screen.CharacterUnitScreen.route + "/${item.id}")
+                        "Эпизоды" -> navHostController.navigate(Screen.EpisodeUnitScreen.route + "/${item.id}")
+                        else -> navHostController.navigate(Screen.LocationUnitScreen.route + "/${item.id}")
+                    }
                 }
             ) {
                 Column(
@@ -44,7 +50,7 @@ fun FavoriteBlock(
                         .fillMaxSize()
                 ) {
                     Text(text = item.category)
-                    Text(text = "id: " + item.id.toString())
+                    Text(text = stringResource(R.string.id_field) + item.id.toString())
                 }
             }
         }

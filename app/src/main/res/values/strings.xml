@@ -14,4 +14,8 @@
     <string name="episode_field_episode">Серия</string>
     <string name="location_field_dimension">Измерение</string>
     <string name="default_unknown">Неизвестен</string>
+    <string name="name_field">Имя: </string>
+    <string name="id_field">Id: </string>
+    <string name="add_favorite_button">Добавить в избранное</string>
+    <string name="delete_favorite_button">Убрать из избранного</string>
 </resources>

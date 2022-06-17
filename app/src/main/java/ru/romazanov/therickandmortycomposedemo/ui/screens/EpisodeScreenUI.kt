@@ -20,6 +20,8 @@ fun EpisodeScreenUI(
     navHostController: NavHostController,
     viewModel: MainViewModel
 ) {
+
+
     Scaffold(
         topBar = {
             DefTopBar(navHostController = navHostController)
@@ -46,7 +48,7 @@ fun EpisodeScreenUI(
                         val page = viewModel.episode.info.next?.substringAfter('=')
                         viewModel.getEpisodeList(page!!)
                     }
-                    EpisodeCard(result = viewModel.episodeList[it])
+                    EpisodeCard(result = viewModel.episodeList[it], navHostController)
                 }
             }
         }

@@ -14,8 +14,13 @@ interface ApiInterface {
 
     @GET("character")
     suspend fun getCharacterList(
-        @Query("page") page: String)
-    : Character
+        @Query("page") page: String
+    ): Character
+
+    @GET("character")
+    suspend fun getCharacterListWithName(
+        @Query("name") name: String
+    ): Character
 
     @GET("episode")
     suspend fun getEpisodeList(
@@ -27,10 +32,11 @@ interface ApiInterface {
         @Query("page") page: String
     ): Location
 
+
     companion object {
         var api: ApiInterface? = null
         fun getInstance(): ApiInterface {
-            if(api == null) {
+            if (api == null) {
                 api = Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
@@ -40,7 +46,6 @@ interface ApiInterface {
             return api!!
         }
     }
-
 
 
 }

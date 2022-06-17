@@ -33,8 +33,7 @@ fun CharacterCard(
         elevation = 4.dp,
         shape = RoundedCornerShape(5.dp),
         onClick = {
-            println(result.id)
-            navHostController.navigate(Screen.CharacterUnitScreen.route + "/${result.id}/character")
+            navHostController.navigate(Screen.CharacterUnitScreen.route + "/${result.id}")
         }
     ) {
         Row(

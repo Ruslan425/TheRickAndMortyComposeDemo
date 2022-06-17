@@ -37,5 +37,24 @@ fun Navigation(
         ) { backStackEntry  ->
             CharsetsUnitScreen(id = backStackEntry.arguments!!.getInt("id"), viewModel = viewModel)
         }
+        composable(Screen.EpisodeUnitScreen.route + "/{id}",
+            arguments = listOf(
+                navArgument(name = "id") {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry  ->
+          EpisodeUnitScreen(id = backStackEntry.arguments!!.getInt("id"), viewModel = viewModel)
+        }
+        composable(Screen.LocationUnitScreen.route + "/{id}",
+            arguments = listOf(
+                navArgument(name = "id") {
+                    type = NavType.IntType
+                }
+            )
+        ) { backStackEntry  ->
+          LocationUnitScreen(id = backStackEntry.arguments!!.getInt("id"), viewModel = viewModel)
+        }
+
     }
 }

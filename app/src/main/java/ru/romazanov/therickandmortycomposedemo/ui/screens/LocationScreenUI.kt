@@ -44,7 +44,7 @@ fun LocationScreenUI(
                         val page = viewModel.location.info.next?.substringAfter('=')
                         viewModel.getLocationList(page!!)
                     }
-                    LocationCard(result = viewModel.locationList[it])
+                    LocationCard(result = viewModel.locationList[it], navHostController)
                 }
             }
         }

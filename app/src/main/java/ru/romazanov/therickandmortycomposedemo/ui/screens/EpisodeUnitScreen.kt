@@ -3,11 +3,14 @@ package ru.romazanov.therickandmortycomposedemo.ui.screens
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
@@ -17,12 +20,12 @@ import ru.romazanov.therickandmortycomposedemo.data.Favorite
 import java.net.URLDecoder
 
 @Composable
-fun CharsetsUnitScreen(
+fun EpisodeUnitScreen(
     id: Int,
-    viewModel: MainViewModel,
+    viewModel: MainViewModel
 ) {
-    val unit = viewModel.characterList[id - 1]
-    val unitToAdd = Favorite(id = id, category = stringResource(R.string.character_field))
+    val unit = viewModel.episodeList[id - 1]
+    val unitToAdd = Favorite(id = id, category = stringResource(R.string.episode_field))
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -30,15 +33,10 @@ fun CharsetsUnitScreen(
     ) {
         Surface(
             shape = CircleShape,
-            modifier = Modifier.size(200.dp)
+            modifier = Modifier.size(200.dp),
+            color = Color.LightGray
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    data = URLDecoder.decode(unit.image)
-                ),
-                contentDescription = "Avatar",
-                modifier = Modifier
-            )
+
         }
         Column(modifier = Modifier
             .padding(8.dp)

@@ -92,6 +92,11 @@ fun StartScreenUI(
             }
             if (viewModel.favorite.isNotEmpty()) {
                 FavoriteBlock(navHostController = navHostController, viewModel = viewModel)
+            } else {
+                Text(
+                    text = "Блок избранного скрыт, для открытия нужно добавить в избранное:)",
+                    modifier = Modifier.padding(8.dp)
+                )
             }
         }
     }
