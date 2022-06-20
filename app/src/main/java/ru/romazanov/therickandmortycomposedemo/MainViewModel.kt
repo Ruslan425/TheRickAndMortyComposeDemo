@@ -24,6 +24,10 @@ class MainViewModel : ViewModel() {
     var episode by mutableStateOf(Episode())
     var location by mutableStateOf(Location())
 
+
+    var characterSearch by mutableStateOf(Character())
+
+
     private var errorMessage: String by mutableStateOf("")
 
     var characterList by mutableStateOf(listOf<Result>())
@@ -36,6 +40,17 @@ class MainViewModel : ViewModel() {
         getLocationList(PAGE)
     }
 
+    fun getCharterListWithName(name: String) {
+        viewModelScope.launch {
+            val apiInterface = ApiInterface.getInstance()
+            try {
+                val answer = apiInterface.getCharacterListWithName(name)
+                characterSearch = answer
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+        }
+    }
 
 
      fun getCharacterList(page: String) {
@@ -47,7 +62,6 @@ class MainViewModel : ViewModel() {
                 characterList += answer.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
-                println(errorMessage)
             }
         }
     }

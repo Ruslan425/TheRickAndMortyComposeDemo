@@ -1,6 +1,6 @@
 package ru.romazanov.therickandmortycomposedemo.ui.screens
 
-import androidx.compose.foundation.Image
+
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
@@ -13,11 +13,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberImagePainter
 import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.data.Favorite
-import java.net.URLDecoder
 
 @Composable
 fun LocationUnitScreen(

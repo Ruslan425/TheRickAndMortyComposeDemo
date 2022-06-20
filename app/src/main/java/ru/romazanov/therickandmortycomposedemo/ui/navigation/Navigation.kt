@@ -55,6 +55,9 @@ fun Navigation(
         ) { backStackEntry  ->
           LocationUnitScreen(id = backStackEntry.arguments!!.getInt("id"), viewModel = viewModel)
         }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(viewModel = viewModel, navHostController = navHostController)
+        }
 
     }
 }
