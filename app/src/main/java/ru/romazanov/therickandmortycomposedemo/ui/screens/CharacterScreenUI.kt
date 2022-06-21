@@ -27,9 +27,9 @@ fun CharacterScreenUI(
             items(count) {
                 if (it >= viewModel.characterList.size - 1 && viewModel.character.info.next != null) {
                     val page = viewModel.character.info.next?.substringAfter('=')
-                    viewModel.getCharacterList(page!!)
+                    viewModel.getCharacterList(mapOf(Pair("page", "$page")))
                 }
-                CharacterCard(result = viewModel.characterList[it], navHostController)
+                CharacterCard(result = viewModel.characterList[it], navHostController, viewModel)
             }
         }
     }

@@ -2,5 +2,5 @@ package ru.romazanov.therickandmortycomposedemo.utils
 
 const val BASE_URL = "https://rickandmortyapi.com/api/"
 
-const val PAGE = "1"
+val OPTIONS = mapOf(Pair("page", "1"))
 

@@ -1,6 +1,6 @@
 package ru.romazanov.therickandmortycomposedemo.data
 
 data class Favorite(
-    val id: Int,
+    val id: String,
     val category: String
 )

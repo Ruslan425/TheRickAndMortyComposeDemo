@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Button
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
@@ -37,19 +36,22 @@ fun SearchScreen(
             Button(
                 modifier = Modifier.fillMaxWidth(),
                 onClick = {
-                    viewModel.getCharterListWithName(text.value.text)
+                    viewModel.getCharterListWithName(mapOf(Pair("name", text.value.text)))
                 }) {
                 Text("Найди меня")
             }
             LazyColumn(
                 Modifier.fillMaxSize()
             ) {
-                items(viewModel.characterSearch.results){ item ->
-                    CharacterCard(result = item, navHostController = navHostController)
+                val count = viewModel.characterList.size
+                items(count) {
+                    if (it >= viewModel.characterList.size - 1 && viewModel.character.info.next != null) {
+                        val page = viewModel.character.info.next?.substringAfter('=')
+                        viewModel.getCharacterList(mapOf(Pair("name", text.value.text),Pair("page", "$page")))
+                    }
+                    CharacterCard(result = viewModel.characterList[it], navHostController, viewModel)
                 }
             }
         }
-
-
     }
 }

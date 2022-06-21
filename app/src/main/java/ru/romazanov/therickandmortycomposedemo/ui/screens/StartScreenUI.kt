@@ -13,6 +13,7 @@ import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 import ru.romazanov.therickandmortycomposedemo.ui.utils.DefTopBar
 import ru.romazanov.therickandmortycomposedemo.ui.utils.FavoriteBlock
+import ru.romazanov.therickandmortycomposedemo.utils.OPTIONS
 
 
 @Composable
@@ -34,15 +35,15 @@ fun StartScreenUI(
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
+                    viewModel.characterList = listOf()
+                    viewModel.getCharacterList(OPTIONS)
                     navHostController.navigate(Screen.CharacterScreen.route)
                 }) {
-
                 Icon(
                     painter = painterResource(id = R.drawable.ic_one),
                     contentDescription = "",
                     modifier = Modifier.padding(end = 2.dp)
                 )
-
                 Text(
                     text = stringResource(R.string.character_field),
                     style = MaterialTheme.typography.h5,

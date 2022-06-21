@@ -28,15 +28,13 @@ fun Navigation(
         composable(Screen.EpisodeScreen.route) {
             EpisodeScreenUI(navHostController = navHostController, viewModel)
         }
-        composable(Screen.CharacterUnitScreen.route + "/{id}",
-            arguments = listOf(
-                navArgument(name = "id") {
-                   type = NavType.IntType
-                }
-            )
-        ) { backStackEntry  ->
-            CharsetsUnitScreen(id = backStackEntry.arguments!!.getInt("id"), viewModel = viewModel)
+        composable(Screen.CharacterUnitScreen.route ) {
+            CharsetsUnitScreen( viewModel = viewModel)
         }
+        composable(Screen.SearchScreen.route) {
+            SearchScreen(viewModel = viewModel, navHostController = navHostController)
+        }
+
         composable(Screen.EpisodeUnitScreen.route + "/{id}",
             arguments = listOf(
                 navArgument(name = "id") {
@@ -55,9 +53,7 @@ fun Navigation(
         ) { backStackEntry  ->
           LocationUnitScreen(id = backStackEntry.arguments!!.getInt("id"), viewModel = viewModel)
         }
-        composable(Screen.SearchScreen.route) {
-            SearchScreen(viewModel = viewModel, navHostController = navHostController)
-        }
+
 
     }
 }

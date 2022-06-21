@@ -12,10 +12,9 @@ import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Result
 import ru.romazanov.therickandmortycomposedemo.data.models.episode.Episode
 import ru.romazanov.therickandmortycomposedemo.data.models.location.Location
 import ru.romazanov.therickandmortycomposedemo.data.retrofit.ApiInterface
-import ru.romazanov.therickandmortycomposedemo.utils.PAGE
+import ru.romazanov.therickandmortycomposedemo.utils.OPTIONS
 
 class MainViewModel : ViewModel() {
-
 
 
     var favorite by mutableStateOf(listOf<Favorite>())
@@ -24,9 +23,7 @@ class MainViewModel : ViewModel() {
     var episode by mutableStateOf(Episode())
     var location by mutableStateOf(Location())
 
-
-    var characterSearch by mutableStateOf(Character())
-
+    var characterUnit by mutableStateOf(Result())
 
     private var errorMessage: String by mutableStateOf("")
 
@@ -35,29 +32,40 @@ class MainViewModel : ViewModel() {
     var locationList by mutableStateOf(listOf<ru.romazanov.therickandmortycomposedemo.data.models.location.Result>())
 
     init {
-        getCharacterList(PAGE)
-        getEpisodeList(PAGE)
-        getLocationList(PAGE)
+        getEpisodeList(OPTIONS)
+        getLocationList(OPTIONS)
     }
 
-    fun getCharterListWithName(name: String) {
+    fun getCharacterUnit(id: String) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getCharacterListWithName(name)
-                characterSearch = answer
+                val answer = apiInterface.getCharacterUnit(id)
+                characterUnit = answer
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
         }
     }
 
-
-     fun getCharacterList(page: String) {
+    fun getCharterListWithName(options: Map<String, String>) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getCharacterList(page)
+                val answer = apiInterface.getCharacterList(options)
+                character = answer
+                characterList  = answer.results
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+        }
+    }
+
+    fun getCharacterList(options: Map<String, String>) {
+        viewModelScope.launch {
+            val apiInterface = ApiInterface.getInstance()
+            try {
+                val answer = apiInterface.getCharacterList(options)
                 character = answer
                 characterList += answer.results
             } catch (e: Exception) {
@@ -66,11 +74,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-  fun getEpisodeList(page: String) {
+    fun getEpisodeList(options: Map<String, String>) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getEpisodeList(page)
+                val answer = apiInterface.getEpisodeList(options)
                 episode = answer
                 episodeList += episode.results
             } catch (e: Exception) {
@@ -79,11 +87,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-     fun getLocationList(page: String) {
+    fun getLocationList(options: Map<String, String>) {
         viewModelScope.launch {
             val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getLocationList(page)
+                val answer = apiInterface.getLocationList(options)
                 location = answer
                 locationList += location.results
             } catch (e: Exception) {

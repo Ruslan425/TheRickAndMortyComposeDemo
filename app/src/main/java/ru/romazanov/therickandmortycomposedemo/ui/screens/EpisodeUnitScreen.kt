@@ -22,7 +22,7 @@ fun EpisodeUnitScreen(
     viewModel: MainViewModel
 ) {
     val unit = viewModel.episodeList[id - 1]
-    val unitToAdd = Favorite(id = id, category = stringResource(R.string.episode_field))
+    val unitToAdd = Favorite(id = id.toString(), category = stringResource(R.string.episode_field))
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

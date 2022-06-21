@@ -27,7 +27,7 @@ fun LocationScreenUI(
             items(count) {
                 if (it >= viewModel.locationList.size - 1 && viewModel.location.info.next != null) {
                     val page = viewModel.location.info.next?.substringAfter('=')
-                    viewModel.getLocationList(page!!)
+                    viewModel.getLocationList(mapOf(Pair("page", "$page")))
                 }
                 LocationCard(result = viewModel.locationList[it], navHostController)
             }

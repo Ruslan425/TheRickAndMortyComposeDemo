@@ -51,6 +51,7 @@ fun DefTopBar(
                         Screen.CharacterScreen.route -> stringResource(R.string.character_field)
                         Screen.EpisodeScreen.route -> stringResource(R.string.episode_field)
                         Screen.LocationScreen.route -> stringResource(R.string.location_field)
+                        Screen.SearchScreen.route -> stringResource(R.string.search_field)
                         else -> stringResource(R.string.rick_and_morty_field)
                     },
                     style = MaterialTheme.typography.h4,
@@ -61,13 +62,14 @@ fun DefTopBar(
                 modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.Center
             ) {
-                IconButton(
-                    onClick = { navHostController.navigate(Screen.SearchScreen.route) }
-                ) {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+                if (navHostController.currentDestination?.route != Screen.SearchScreen.route) {
+                    IconButton(
+                        onClick = { navHostController.navigate(Screen.SearchScreen.route) }
+                    ) {
+                        Icon(imageVector = Icons.Default.Search, contentDescription = "search")
+                    }
                 }
             }
-
 
         }
     }

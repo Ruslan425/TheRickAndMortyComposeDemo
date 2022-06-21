@@ -27,7 +27,7 @@ fun EpisodeScreenUI(
             items(count) {
                 if (it >= viewModel.episodeList.size - 1 && viewModel.episode.info.next != null) {
                     val page = viewModel.episode.info.next?.substringAfter('=')
-                    viewModel.getEpisodeList(page!!)
+                    viewModel.getEpisodeList(mapOf(Pair("page", "$page")))
                 }
                 EpisodeCard(result = viewModel.episodeList[it], navHostController)
             }

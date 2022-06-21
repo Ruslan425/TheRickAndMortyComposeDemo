@@ -38,7 +38,10 @@ fun FavoriteBlock(
                 elevation = 4.dp,
                 onClick = {
                     when (item.category) {
-                        "Персонажи" -> navHostController.navigate(Screen.CharacterUnitScreen.route + "/${item.id}")
+                        "Персонажи" -> {
+                            viewModel.getCharacterUnit(item.id)
+                            navHostController.navigate(Screen.CharacterUnitScreen.route)
+                        }
                         "Эпизоды" -> navHostController.navigate(Screen.EpisodeUnitScreen.route + "/${item.id}")
                         else -> navHostController.navigate(Screen.LocationUnitScreen.route + "/${item.id}")
                     }

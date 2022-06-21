@@ -18,4 +18,5 @@
     <string name="id_field">Id: </string>
     <string name="add_favorite_button">Добавить в избранное</string>
     <string name="delete_favorite_button">Убрать из избранного</string>
+    <string name="search_field">Поиск</string>
 </resources>

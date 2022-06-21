@@ -17,11 +17,15 @@ import java.net.URLDecoder
 
 @Composable
 fun CharsetsUnitScreen(
-    id: Int,
     viewModel: MainViewModel,
 ) {
-    val unit = viewModel.characterList[id - 1]
-    val unitToAdd = Favorite(id = id, category = stringResource(R.string.character_field))
+
+
+
+    val unit = viewModel.characterUnit
+
+    val unitToAdd = Favorite(id = unit.id.toString(), category = stringResource(R.string.character_field))
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,

@@ -23,7 +23,7 @@ fun LocationUnitScreen(
     viewModel: MainViewModel
 ) {
     val unit = viewModel.locationList[id - 1]
-    val unitToAdd = Favorite(id = id, category = stringResource(R.string.location_field))
+    val unitToAdd = Favorite(id = id.toString(), category = stringResource(R.string.location_field))
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
