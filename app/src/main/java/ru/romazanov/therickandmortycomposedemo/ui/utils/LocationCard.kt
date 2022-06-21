@@ -13,6 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.data.models.location.Result
 import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
@@ -22,7 +23,8 @@ import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 @Composable
 fun LocationCard(
     result: Result,
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    viewModel: MainViewModel
 ) {
     Card(
         modifier = Modifier
@@ -32,7 +34,9 @@ fun LocationCard(
         elevation = 4.dp,
         shape = RoundedCornerShape(5.dp),
         onClick = {
-            navHostController.navigate(Screen.LocationUnitScreen.route + "/${result.id}")
+
+            viewModel.getLocationUnit(result.id.toString())
+            navHostController.navigate(Screen.LocationUnitScreen.route)
         }
     ) {
         Column(

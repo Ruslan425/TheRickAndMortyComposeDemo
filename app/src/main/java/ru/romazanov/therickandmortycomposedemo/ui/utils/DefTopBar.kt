@@ -62,7 +62,7 @@ fun DefTopBar(
                 modifier = Modifier.weight(1f),
                 contentAlignment = Alignment.Center
             ) {
-                if (navHostController.currentDestination?.route != Screen.SearchScreen.route) {
+                if (navHostController.currentDestination?.route == Screen.StartScreen.route) {
                     IconButton(
                         onClick = { navHostController.navigate(Screen.SearchScreen.route) }
                     ) {
@@ -70,7 +70,6 @@ fun DefTopBar(
                     }
                 }
             }
-
         }
     }
 }

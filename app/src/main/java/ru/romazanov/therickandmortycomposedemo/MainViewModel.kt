@@ -24,6 +24,8 @@ class MainViewModel : ViewModel() {
     var location by mutableStateOf(Location())
 
     var characterUnit by mutableStateOf(Result())
+    var episodeUnit by mutableStateOf(ru.romazanov.therickandmortycomposedemo.data.models.episode.Result())
+    var locationUnit by mutableStateOf(ru.romazanov.therickandmortycomposedemo.data.models.location.Result())
 
     private var errorMessage: String by mutableStateOf("")
 
@@ -31,14 +33,10 @@ class MainViewModel : ViewModel() {
     var episodeList by mutableStateOf(listOf<ru.romazanov.therickandmortycomposedemo.data.models.episode.Result>())
     var locationList by mutableStateOf(listOf<ru.romazanov.therickandmortycomposedemo.data.models.location.Result>())
 
-    init {
-        getEpisodeList(OPTIONS)
-        getLocationList(OPTIONS)
-    }
+    private val apiInterface = ApiInterface.getInstance()
 
     fun getCharacterUnit(id: String) {
         viewModelScope.launch {
-            val apiInterface = ApiInterface.getInstance()
             try {
                 val answer = apiInterface.getCharacterUnit(id)
                 characterUnit = answer
@@ -50,11 +48,10 @@ class MainViewModel : ViewModel() {
 
     fun getCharterListWithName(options: Map<String, String>) {
         viewModelScope.launch {
-            val apiInterface = ApiInterface.getInstance()
             try {
                 val answer = apiInterface.getCharacterList(options)
                 character = answer
-                characterList  = answer.results
+                characterList = answer.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
@@ -63,7 +60,6 @@ class MainViewModel : ViewModel() {
 
     fun getCharacterList(options: Map<String, String>) {
         viewModelScope.launch {
-            val apiInterface = ApiInterface.getInstance()
             try {
                 val answer = apiInterface.getCharacterList(options)
                 character = answer
@@ -74,9 +70,43 @@ class MainViewModel : ViewModel() {
         }
     }
 
+    fun getLocationList(options: Map<String, String>) {
+        viewModelScope.launch {
+            try {
+                val answer = apiInterface.getLocationList(options)
+                location = answer
+                locationList += location.results
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+        }
+    }
+
+    fun getLocationListWithName(option: Map<String, String>) {
+        viewModelScope.launch {
+            try {
+                val answer = apiInterface.getLocationList(option)
+                location = answer
+                locationList += answer.results
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+        }
+    }
+
+    fun getLocationUnit(id: String) {
+        viewModelScope.launch {
+            try {
+                val answer = apiInterface.getLocationUnit(id)
+                locationUnit = answer
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+        }
+    }
+
     fun getEpisodeList(options: Map<String, String>) {
         viewModelScope.launch {
-            val apiInterface = ApiInterface.getInstance()
             try {
                 val answer = apiInterface.getEpisodeList(options)
                 episode = answer
@@ -87,13 +117,23 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getLocationList(options: Map<String, String>) {
+    fun getEpisodeListWithName(options: Map<String, String>) {
         viewModelScope.launch {
-            val apiInterface = ApiInterface.getInstance()
             try {
-                val answer = apiInterface.getLocationList(options)
-                location = answer
-                locationList += location.results
+                val answer = apiInterface.getEpisodeList(options)
+                episode = answer
+                episodeList += answer.results
+            } catch (e: Exception) {
+                errorMessage = e.message.toString()
+            }
+        }
+    }
+
+    fun getEpisodeUnit(id: String) {
+        viewModelScope.launch {
+            try {
+                val answer = apiInterface.getEpisodeUnit(id)
+                episodeUnit = answer
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }

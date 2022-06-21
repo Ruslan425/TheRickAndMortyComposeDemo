@@ -29,7 +29,7 @@ fun EpisodeScreenUI(
                     val page = viewModel.episode.info.next?.substringAfter('=')
                     viewModel.getEpisodeList(mapOf(Pair("page", "$page")))
                 }
-                EpisodeCard(result = viewModel.episodeList[it], navHostController)
+                EpisodeCard(result = viewModel.episodeList[it], navHostController, viewModel)
             }
         }
     }

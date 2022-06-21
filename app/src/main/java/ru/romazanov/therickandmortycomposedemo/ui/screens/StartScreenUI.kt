@@ -55,6 +55,8 @@ fun StartScreenUI(
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
+                    viewModel.locationList = listOf()
+                    viewModel.getLocationList(OPTIONS)
                     navHostController.navigate(Screen.LocationScreen.route)
                 }) {
 
@@ -74,6 +76,8 @@ fun StartScreenUI(
                     .fillMaxWidth()
                     .height(70.dp),
                 onClick = {
+                    viewModel.episodeList = listOf()
+                    viewModel.getEpisodeList(OPTIONS)
                     navHostController.navigate(Screen.EpisodeScreen.route)
                 }) {
 

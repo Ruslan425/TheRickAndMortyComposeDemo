@@ -18,24 +18,30 @@ interface ApiInterface {
     suspend fun getCharacterList(
         @QueryMap() options: Map<String, String>
     ): Character
-
-    @GET("episode")
-    suspend fun getEpisodeList(
-        @QueryMap() options: Map<String, String>
-    ): Episode
-
-    @GET("location")
-    suspend fun getLocationList(
-        @QueryMap() options: Map<String, String>
-    ): Location
-
-
     @GET("character/{id}")
     suspend fun getCharacterUnit(
         @Path("id") id: String
     ): Result
 
 
+    @GET("episode")
+    suspend fun getEpisodeList(
+        @QueryMap() options: Map<String, String>
+    ): Episode
+    @GET("episode/{id}")
+    suspend fun getEpisodeUnit(
+        @Path("id") id: String
+    ): ru.romazanov.therickandmortycomposedemo.data.models.episode.Result
+
+
+    @GET("location")
+    suspend fun getLocationList(
+        @QueryMap() options: Map<String, String>
+    ): Location
+    @GET("location/{id}")
+    suspend fun getLocationUnit(
+        @Path("id") id: String
+    ): ru.romazanov.therickandmortycomposedemo.data.models.location.Result
 
     companion object {
         var api: ApiInterface? = null

@@ -20,61 +20,62 @@ fun CharsetsUnitScreen(
     viewModel: MainViewModel,
 ) {
 
-
-
     val unit = viewModel.characterUnit
 
     val unitToAdd = Favorite(id = unit.id.toString(), category = stringResource(R.string.character_field))
 
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Surface(
-            shape = CircleShape,
-            modifier = Modifier.size(200.dp)
+    Scaffold() {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
         ) {
-            Image(
-                painter = rememberImagePainter(
-                    data = URLDecoder.decode(unit.image)
-                ),
-                contentDescription = "Avatar",
-                modifier = Modifier
-            )
-        }
-        Column(modifier = Modifier
-            .padding(8.dp)
-            .fillMaxWidth(),
-            horizontalAlignment = Alignment.Start
-        ) {
-            Text(
-                text = stringResource(R.string.id_field) + unit.id.toString(),
-                style = MaterialTheme.typography.h4
-            )
-            Text(
-                text = stringResource(R.string.name_field) + unit.name,
-                style = MaterialTheme.typography.h4
-            )
-        }
-        OutlinedButton(
-            modifier = Modifier
-                .padding(8.dp)
-                .fillMaxWidth()
-                .height(50.dp),
-            onClick = {
-                if (!viewModel.favorite.contains(unitToAdd)) {
-                    viewModel.favorite += unitToAdd
-                } else {
-                    viewModel.favorite -= unitToAdd
-                }
+            Surface(
+                shape = CircleShape,
+                modifier = Modifier.size(200.dp)
+            ) {
+                Image(
+                    painter = rememberImagePainter(
+                        data = URLDecoder.decode(unit.image)
+                    ),
+                    contentDescription = "Avatar",
+                    modifier = Modifier
+                )
             }
-        ) {
-            if (!viewModel.favorite.contains(unitToAdd)) {
-                Text(text = stringResource(R.string.add_favorite_button))
-            } else {
-                Text(text = stringResource(R.string.delete_favorite_button))
+            Column(modifier = Modifier
+                .padding(8.dp)
+                .fillMaxWidth(),
+                horizontalAlignment = Alignment.Start
+            ) {
+                Text(
+                    text = stringResource(R.string.id_field) + unit.id.toString(),
+                    style = MaterialTheme.typography.h4
+                )
+                Text(
+                    text = stringResource(R.string.name_field) + unit.name,
+                    style = MaterialTheme.typography.h4
+                )
+            }
+            OutlinedButton(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .fillMaxWidth()
+                    .height(50.dp),
+                onClick = {
+                    if (!viewModel.favorite.contains(unitToAdd)) {
+                        viewModel.favorite += unitToAdd
+                    } else {
+                        viewModel.favorite -= unitToAdd
+                    }
+                }
+            ) {
+                if (!viewModel.favorite.contains(unitToAdd)) {
+                    Text(text = stringResource(R.string.add_favorite_button))
+                } else {
+                    Text(text = stringResource(R.string.delete_favorite_button))
+                }
             }
         }
     }
+
 }

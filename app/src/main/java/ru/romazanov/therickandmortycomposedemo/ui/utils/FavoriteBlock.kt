@@ -42,8 +42,14 @@ fun FavoriteBlock(
                             viewModel.getCharacterUnit(item.id)
                             navHostController.navigate(Screen.CharacterUnitScreen.route)
                         }
-                        "Эпизоды" -> navHostController.navigate(Screen.EpisodeUnitScreen.route + "/${item.id}")
-                        else -> navHostController.navigate(Screen.LocationUnitScreen.route + "/${item.id}")
+                        "Эпизоды" -> {
+                            viewModel.getEpisodeUnit(item.id)
+                            navHostController.navigate(Screen.EpisodeUnitScreen.route)
+                        }
+                        else -> {
+                            viewModel.getLocationUnit(item.id)
+                            navHostController.navigate(Screen.LocationUnitScreen.route)
+                        }
                     }
                 }
             ) {
