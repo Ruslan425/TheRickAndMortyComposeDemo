@@ -87,7 +87,7 @@ class MainViewModel : ViewModel() {
             try {
                 val answer = apiInterface.getLocationList(option)
                 location = answer
-                locationList += answer.results
+                locationList = answer.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
@@ -122,7 +122,7 @@ class MainViewModel : ViewModel() {
             try {
                 val answer = apiInterface.getEpisodeList(options)
                 episode = answer
-                episodeList += answer.results
+                episodeList = answer.results
             } catch (e: Exception) {
                 errorMessage = e.message.toString()
             }
