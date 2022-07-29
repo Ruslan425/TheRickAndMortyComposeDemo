@@ -4,5 +4,5 @@ import ru.romazanov.therickandmortycomposedemo.data.models.general.Info
 
 data class Character(
     val info: Info = Info(),
-    val results: List<Result> = listOf()
+    var results: List<Result> = listOf()
 )

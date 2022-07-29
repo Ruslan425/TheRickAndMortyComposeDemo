@@ -1,34 +1,45 @@
 package ru.romazanov.therickandmortycomposedemo.ui.utils
 
 
-import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import coil.compose.rememberImagePainter
+import ru.romazanov.therickandmortycomposedemo.MainViewModel
 import ru.romazanov.therickandmortycomposedemo.R
 import ru.romazanov.therickandmortycomposedemo.data.models.characrer.Result
+import ru.romazanov.therickandmortycomposedemo.ui.navigation.Screen
 import java.net.URLDecoder
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CharacterCard(
-    result: Result
+    result: Result,
+    navHostController: NavHostController,
+    viewModel: MainViewModel
 ) {
-
     Card(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .height(100.dp),
         elevation = 4.dp,
-        shape = RoundedCornerShape(5.dp)
+        shape = RoundedCornerShape(5.dp),
+        onClick = {
+
+            viewModel.getCharacterUnit(result.id.toString())
+
+            navHostController.navigate(Screen.CharacterUnitScreen.route)
+        }
     ) {
         Row(
             modifier = Modifier
@@ -61,3 +72,4 @@ fun CharacterCard(
         }
     }
 }
+
